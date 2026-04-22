@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()" [disabled]="!taskTitle.trim()" strong="true">
+        Guardar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-input
+        label="Título"
+        labelPlacement="stacked"
+        placeholder="¿Qué necesitas hacer?"
+        [(ngModel)]="taskTitle"
+        autofocus="true"
+        type="text">
+      </ion-input>
+    </ion-item>
+
+    @if (categoriesEnabled && categories.length > 0) {
+    <ion-item>
+      <ion-select
+        label="Categoría"
+        labelPlacement="stacked"
+        placeholder="Sin categoría"
+        [(ngModel)]="selectedCategoryId"
+        interface="action-sheet"
+        [interfaceOptions]="{ header: 'Seleccionar Categoría' }">
+        @for (cat of categories; track cat.id) {
+        <ion-select-option [value]="cat.id">{{ cat.name }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

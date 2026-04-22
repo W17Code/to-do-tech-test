@@ -11,7 +11,9 @@ export class CategoryService {
   private categoriesSubject = new BehaviorSubject<Category[]>([]);
   categories$ = this.categoriesSubject.asObservable();
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage) {
+    this.initStorage();
+  }
 
   //Inicia la base de datos local
   private async initStorage() {
@@ -27,7 +29,12 @@ export class CategoryService {
   }
 
   //Agrega una nueva categoria
-  async addCategory(category: Category) {
+  async addCategory(name: string, color?: string) {
+    const category: Category = {
+      id: Date.now().toString(),
+      name: name,
+      color: color
+    };
     const categories = [...this.categoriesSubject.getValue(), category];
     await this._storage?.set('categories', categories);
     this.categoriesSubject.next(categories);

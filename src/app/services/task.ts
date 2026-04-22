@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject } from 'rxjs';
-import { Category, Task } from '../models/app.models';
+import { Task } from '../models/app.models';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +13,12 @@ export class TaskService {
   private tasksSubject = new BehaviorSubject<Task[]>([]);
   tasks$ = this.tasksSubject.asObservable();
 
-  //Observable que contiene todas las categorias
-  private categoriesSubject = new BehaviorSubject<Category[]>([]);
-  categories$ = this.categoriesSubject.asObservable();
 
   constructor(
     private storage: Storage
-  ) { }
+  ) {
+    this.initStorage();
+  }
 
   //Inicia la base de datos local
   private async initStorage() {
@@ -30,12 +29,8 @@ export class TaskService {
 
   //Carga los datos al iniciar la app
   private async loadData() {
-    const tasks = await this._storage?.get('tasks') || []
-    const categories = await this._storage?.get('categories') || []
-
-    //Carga o actualiza los datos a los observables
+    const tasks = await this._storage?.get('tasks') || [];
     this.tasksSubject.next(tasks);
-    this.categoriesSubject.next(categories);
   }
 
   //Agrega una nueva tarea

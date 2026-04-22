@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { getRemoteConfig, fetchAndActivate, getValue } from 'firebase/remote-config';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class FirebaseService {
 
     //Establece los valores por defecto si no hay conexion con firebase
     remoteConfig.defaultConfig = {
-      'categories_enabled': false
+      'categories_enabled': true
     };
 
     try {
