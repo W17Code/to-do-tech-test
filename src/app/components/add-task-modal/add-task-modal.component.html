@@ -46,5 +46,24 @@
         }
       </ion-select>
     }
+    @if (isEditing) {
+      <ion-item lines="none" class="toggle-item">
+        <ion-toggle [(ngModel)]="taskCompleted" color="success"></ion-toggle>
+        <ion-label>Marcar como completada</ion-label>
+      </ion-item>
+    }
+
+    @if (!categoriesEnabled) {
+      <div class="info-card">
+        <ion-icon name="information-circle" aria-hidden="true"></ion-icon>
+        <p>Las categorías están deshabilitadas. Añade tareas sin asignar.</p>
+      </div>
+    }
+    @else if (categories.length === 0) {
+      <div class="info-card">
+        <ion-icon name="sad-outline" aria-hidden="true"></ion-icon>
+        <p>No hay categorías disponibles. Añade categorías para poder organizar tus tareas.</p>
+      </div>
+    }
   </div>
 </ion-content>

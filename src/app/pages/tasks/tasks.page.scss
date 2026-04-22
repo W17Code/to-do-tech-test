@@ -1,27 +1,31 @@
+ion-toolbar {
+  --min-height: 25px;
+}
+
 .task-completed {
-    text-decoration: line-through;
-    opacity: 0.6;
-    transition: all 0.3s ease;
+  text-decoration: line-through;
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
 .task-title {
-    margin: 0;
-    font-size: 16px;
+  margin: 0;
+  font-size: 16px;
 }
 
 .task-category {
-    margin: 4px 0 0;
-    font-size: 14px;
-    color: var(--ion-color-medium);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .category-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }

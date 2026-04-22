@@ -16,9 +16,10 @@ export class AddTaskModalComponent implements OnInit {
 
   taskTitle: string = '';
   selectedCategoryId: string = '';
+  taskCompleted: boolean = false;
   isEditing: boolean = false;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
     //Si recibe una tarea existente, pre-llena los campos
@@ -26,6 +27,7 @@ export class AddTaskModalComponent implements OnInit {
       this.isEditing = true;
       this.taskTitle = this.task.title;
       this.selectedCategoryId = this.task.categoryId || '';
+      this.taskCompleted = this.task.completed;
     }
   }
 
@@ -42,8 +44,10 @@ export class AddTaskModalComponent implements OnInit {
     const task: Task = {
       id: this.task?.id || Date.now().toString(),
       title: title,
-      completed: this.task?.completed || false,
-      categoryId: this.selectedCategoryId || undefined
+      completed: this.isEditing
+        ? this.taskCompleted
+        : this.task?.completed || false,
+      categoryId: this.selectedCategoryId || undefined,
     };
 
     this.modalCtrl.dismiss(task, 'save');

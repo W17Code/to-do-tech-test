@@ -8,3 +8,22 @@ ion-content {
   gap: 16px;
   margin-top: 8px;
 }
+
+.toggle-item {
+  --background: transparent;
+  --padding-start: 0;
+  --padding-end: 0;
+  --inner-padding-end: 0;
+  margin-top: 8px;
+  
+  ion-label {
+    font-weight: 500;
+    color: var(--ion-color-dark);
+  }
+
+  ion-icon {
+    color: var(--ion-color-primary);
+    margin-right: 12px;
+    font-size: 24px;
+  }
+}
