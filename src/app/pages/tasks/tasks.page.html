@@ -24,7 +24,7 @@
 
 <!-- Lista de tareas -->
 <ion-content color="light">
-  <ion-list inset="true">
+  <ion-list lines="full">
     @for (task of (filteredTasks$ | async); track task.id) {
     <ion-item-sliding>
 

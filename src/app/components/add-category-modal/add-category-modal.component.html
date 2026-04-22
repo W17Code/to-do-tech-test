@@ -14,22 +14,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-input
-        label="Nombre"
-        labelPlacement="stacked"
-        placeholder="Nombre de la categoría"
-        [(ngModel)]="categoryName"
-        autofocus="true"
-        type="text">
-      </ion-input>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <ion-input
+      fill="outline"
+      shape="round"
+      label="Nombre de la categoría"
+      labelPlacement="floating"
+      placeholder="Ej: Trabajo, Personal, etc."
+      [(ngModel)]="categoryName"
+      autofocus="true"
+      type="text"
+    >
+      <ion-icon slot="start" name="pricetag-outline" aria-hidden="true"></ion-icon>
+    </ion-input>
+  </div>
 
   <div class="color-section">
-    <ion-label class="color-label">Color</ion-label>
+    <ion-label class="color-label">Elige un color para diferenciarla</ion-label>
     <div class="color-grid">
       @for (color of colors; track color) {
       <button

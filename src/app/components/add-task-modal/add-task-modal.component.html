@@ -14,33 +14,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-input
-        label="Título"
-        labelPlacement="stacked"
-        placeholder="¿Qué necesitas hacer?"
-        [(ngModel)]="taskTitle"
-        autofocus="true"
-        type="text">
-      </ion-input>
-    </ion-item>
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <ion-input
+      fill="outline"
+      shape="round"
+      label="Título de la tarea"
+      labelPlacement="floating"
+      placeholder="¿Qué necesitas hacer?"
+      [(ngModel)]="taskTitle"
+      autofocus="true"
+      type="text"
+    >
+      <ion-icon slot="start" name="create-outline" aria-hidden="true"></ion-icon>
+    </ion-input>
 
     @if (categoriesEnabled && categories.length > 0) {
-    <ion-item>
       <ion-select
+        fill="outline"
+        shape="round"
         label="Categoría"
-        labelPlacement="stacked"
-        placeholder="Sin categoría"
+        labelPlacement="floating"
+        placeholder="Selecciona una categoría"
         [(ngModel)]="selectedCategoryId"
         interface="action-sheet"
-        [interfaceOptions]="{ header: 'Seleccionar Categoría' }">
+        [interfaceOptions]="{ header: 'Seleccionar Categoría' }"
+      >
+        <ion-icon slot="start" name="folder-open-outline" aria-hidden="true"></ion-icon>
         @for (cat of categories; track cat.id) {
-        <ion-select-option [value]="cat.id">{{ cat.name }}</ion-select-option>
+          <ion-select-option [value]="cat.id">{{ cat.name }}</ion-select-option>
         }
       </ion-select>
-    </ion-item>
     }
-  </ion-list>
+  </div>
 </ion-content>
