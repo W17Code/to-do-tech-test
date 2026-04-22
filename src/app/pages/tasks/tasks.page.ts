@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FirebaseService } from 'src/app/services/firebase';
 import { TaskService } from 'src/app/services/task';
 import { CategoryService } from 'src/app/services/category';
@@ -16,6 +17,7 @@ import { AddCategoryModalComponent } from 'src/app/components/add-category-modal
   standalone: false,
 })
 export class TasksPage implements OnInit {
+  private destroyRef = inject(DestroyRef);
   categoriesEnabled$!: Observable<boolean>;
   filteredTasks$!: Observable<Task[]>;
   categories$!: Observable<Category[]>;
@@ -40,7 +42,9 @@ export class TasksPage implements OnInit {
     this.categories$ = this.categoryService.categories$;
 
     //Mantiene mapas actualizados de categorías para mostrar nombres y colores
-    this.categories$.subscribe(cats => {
+    this.categories$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(cats => {
       this.categoryMap = {};
       this.colorMap = {};
       cats.forEach(c => {
